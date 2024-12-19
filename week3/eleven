@@ -1,0 +1,25 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+
+/**
+ *
+ * @author User
+ */
+import java.util.*;
+public class week3_eleven {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Please insert a number : ");
+        int num = sc.nextInt();
+        double count = num / 5;
+        int final_count = (int)count;
+        int eiei = num - (final_count*5);
+        String over = "|";
+        String result = over.repeat(eiei); 
+        for (int ssort = 1 ; ssort <= final_count ; ssort++){
+            System.out.print("||||/" + result);    
+            }
+        } 
+    }
