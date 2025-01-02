@@ -1,0 +1,66 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+
+/**
+ *
+ * @author User
+ */
+public class Fraction1 {
+    public int topN; 
+    public int btmN;
+
+    public String toFraction() {
+        return topN + "/" + btmN;
+    }
+
+    public String toFloat() {
+        return String.valueOf((double) topN / btmN);
+    }
+
+    public boolean myEquals(Fraction1 x) {
+        return this.topN * x.btmN == this.btmN * x.topN;
+    }
+
+    public void LowestTermFrac() {
+        int a = topN;
+        int b = btmN;
+
+        while (b != 0) {
+            int temp = b;
+            b = a % b;
+            a = temp;
+        }
+
+        int gcd = Math.abs(a);
+        topN /= gcd;
+        btmN /= gcd;
+    }
+
+    public static void main(String[] args) {
+        Fraction1 f1 = new Fraction1();
+        f1.topN = 1;
+        f1.btmN = 3;
+
+        Fraction1 f2 = new Fraction1();
+        f2.topN = 4;
+        f2.btmN = 16;
+
+        Fraction1 f3 = new Fraction1();
+        f3.topN = 5;
+        f3.btmN = 15;
+
+        System.out.println(f1.toFloat());
+        System.out.println(f2.toFloat());
+        System.out.println(f3.toFloat());
+
+        System.out.println("f1 is equal to f2 >> " + f1.myEquals(f2));
+        System.out.println("f1 is equal to f3 >> " + f1.myEquals(f3));
+
+        System.out.println("Before : " + f2.toFraction());
+        f2.LowestTermFrac();
+        System.out.println("After : " + f2.toFraction());
+    }
+}
+
