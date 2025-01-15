@@ -7,6 +7,6 @@
  *
  * @author COMBIT_15
  */
-public class Employee {
+public class Seller {
     
 }
