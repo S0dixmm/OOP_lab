@@ -1,0 +1,272 @@
+public abstract class Bird implements Flyable{
+    private double wingSize;
+    private double weight;
+    private double height;
+    
+    public Bird(){this(0.0,0.0,0.0);}
+    public Bird(double wingSize, double weight, double height){
+        this.wingSize = wingSize;
+        this.weight = weight;
+        this.height = height;
+    }
+    
+    public void eat(double food){
+        if (food > 0){
+            this.weight += food;
+        }else{
+            System.out.println("Input cannot be negative number.");
+        }
+    }
+
+    public double getWingSize() {
+        return wingSize;
+    }
+
+    public void setWingSize(double wingSize) {
+        this.wingSize = wingSize;
+    }
+
+    public double getWeight() {
+        return weight;
+    }
+
+    public void setWeight(double weight) {
+        this.weight = weight;
+    }
+
+    public double getHeight() {
+        return height;
+    }
+
+    public void setHeight(double height) {
+        this.height = height;
+    }
+    
+}
+
+public class Dieselable {
+    public abstract void startEngine();
+    public abstract void stopEngine();
+}
+
+public interface Floatable {
+    public void fl0at();
+}
+
+public interface Flyable {
+    public abstract void fly();
+    public abstract void takeOff();
+    public abstract void landing();
+}
+
+public class Pigeon extends Bird {
+    private static int numberOfPigeon;
+    
+    public Pigeon(){this(0.0,0.0,0.0);}
+    public Pigeon(double wingSize, double weight, double height){
+        super(wingSize, weight, height);
+        Pigeon.numberOfPigeon++;
+    }
+    
+    public void eat(String food){
+        if (food.equals("worm")){
+            this.setWeight(this.getWeight() + 0.5);
+        } else if (food.equals("seed")){
+            this.setWeight(this.getWeight() + 0.2);
+        }else{
+            System.out.println("Pigeon can eat only worm and seed.");
+        }
+    }
+    @Override
+    public String toString(){
+        return "Pigeon " + this.getWeight() + " kg and "+" " + this.getHeight() + " cm. There are " + Pigeon.numberOfPigeon + " pigeons.";
+    }
+    
+    @Override
+    public void fly(){
+        if (this.getWeight() >= 5){
+            this.setWeight(this.getWeight() - 0.25);
+            System.out.println("Fly Fly");
+        }else{
+            System.out.println("I'm hungry.");
+        }
+    }
+    @Override
+    public void takeOff(){
+        if (this.getWeight() >= 5){
+            this.setWeight(this.getWeight() - 0.5);
+            System.out.println("Take Off");
+        }else{
+            System.out.println("I'm hungry.");
+        }
+    }
+    
+    @Override
+    public void landing(){
+        if (this.getWeight() >= 5){
+            this.setWeight(this.getWeight() - 0.5);
+            System.out.println("Landing");
+        }else{
+            System.out.println("I'm hungry.");
+        }
+    }
+}
+
+public class Plane extends Vehicle implements Flyable{
+    private String airline;
+    private String boeing;
+    private static final int MAX_FLYER = 2;
+    
+    public Plane(){this(0.0,"","");}
+    public Plane(double fuel, String airline, String boeing){
+        super(fuel);
+        this.airline = airline;
+        this.boeing = boeing;
+    }
+    
+    public String getAirline() {
+        return airline;
+    }
+
+    public void setAirline(String airline) {
+        this.airline = airline;
+    }
+
+    public String getBoeing() {
+        return boeing;
+    }
+
+    public void setBoeing(String boeing) {
+        this.boeing = boeing;
+    }
+    
+    @Override
+    public void startEngine(){
+        if (this.fuel >= 20){
+            this.fuel -= 20;
+            System.out.println("Plane’s Engine starts");
+        }else{
+            System.out.println("Fuel is not enough.");
+        }
+    }
+    
+    @Override
+    public void stopEngine(){
+        System.out.println("Plane’s Engine stops");
+    }
+    
+    @Override
+    public void honk(){
+        System.out.println("Weeeeeee");
+    }
+    
+    @Override
+    public void fly(){
+        if (this.fuel >= 20){
+            this.fuel -= 20;
+            System.out.println("Plane Fly");
+        }else{
+            System.out.println("Fuel is nearly empty.");
+        }
+    }
+    
+    @Override
+    public void takeOff(){
+        if (fuel >= 10){
+            fuel -= 10;
+            System.out.println("Plane Already to Take Off");
+        }else{
+            System.out.println("Fuel is nearly empty.");
+        }
+    }
+    
+    @Override
+    public void landing(){
+        if (fuel >= 10){
+            fuel -= 10;
+            System.out.println("Plane Already to Landing");
+        }else{
+            System.out.println("Fuel is nearly empty.");
+        }
+    }
+}
+
+public class Ship extends Vehicle implements Floatable{
+    public Ship(){this(0.0);}
+    public Ship(double fuel){
+        super(fuel);
+    }
+    
+    @Override
+    public void fl0at(){
+        if (fuel >= 50){
+            fuel -= 50;
+            System.out.println("Ship moves");
+        }else{
+            System.out.println("Fuel is not enough.");
+        }
+    }
+    
+    @Override
+    public void startEngine(){
+        if (fuel >= 10){
+            fuel -= 10;
+            System.out.println("Engine starts");
+        }else{
+            System.out.println("Fuel is not enough.");
+        }
+    }
+    
+    @Override
+    public void stopEngine(){
+        System.out.println("Engine stops");
+    }
+    
+    @Override
+    public void honk(){
+        System.out.println("Shhhhh");
+    }
+    
+    public void move(){
+        this.fl0at();
+    }
+    
+    public void move(int distance){
+        for (int i = 1; i <= distance; i++){
+            if (fuel >= 50){
+                this.fl0at();  
+            }else{
+                System.out.println("Fuel is not enough.");
+                break;
+            }
+        }
+    }
+}
+
+public abstract class Vehicle implements Dieselable{
+    protected double fuel;
+    
+    public Vehicle(){this(0.0);}
+    public Vehicle(double fuel){
+        this.fuel = fuel;
+    }
+    
+    public void addFuel(double fuel){
+        if (fuel > 0){
+            this.fuel += fuel;
+        }else{
+            System.out.println("Fuel is empty.");
+        }
+    }
+    
+    public abstract void honk();
+
+    public double getFuel() {
+        return fuel;
+    }
+
+    public void setFuel(double fuel) {
+        this.fuel = fuel;
+    }
+    
+}
