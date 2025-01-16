@@ -1,0 +1,143 @@
+public class Employee {
+    private String nationality = "Thai";
+    private String name;
+    private Wallet wallet;
+    private int energy;
+    
+    public boolean equals(Employee e){
+    }
+    
+    public String toString(){
+    }
+    
+    public boolean buyFood(Seller s){
+    }
+    
+    public void eat(Food f){    
+    }
+
+    public String getNationality() {
+        return nationality;
+    }
+
+    public void setNationality(String nationality) {
+        this.nationality = nationality;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Wallet getWallet() {
+        return wallet;
+    }
+
+    public void setWallet(Wallet wallet) {
+        this.wallet = wallet;
+    }
+
+    public int getEnergy() {
+        return energy;
+    }
+
+    public void setEnergy(int energy) {
+        this.energy = energy;
+    }
+    public void eat(Food food) {
+        this.energy += food.getEnergy();
+    }
+
+    public boolean buyFood(Seller seller) {
+        Food food = seller.sell(this);
+        if (food != null) {
+            eat(food);
+            return true;
+        }
+        return false;
+    }
+
+    public String toString() {
+        return "My name is " + name + ".\nI have " + energy + " energy left.\n" +
+                "I have a balance of " + wallet.getBalance() + " baht.";
+    }
+    
+    
+    
+}
+
+public class Food {
+    private final int energy = 10;
+    private final double price = 50;
+    
+    public int getEnergy() {
+        return energy;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+}
+    
+}
+
+public class Programmer extends Employee{
+    private int happiness;
+    
+    public void coding (String str){
+    }
+    
+    public void coding(char str){
+    }
+    
+    public int getHappiness(){
+    }
+    
+    public void setHappiness(int happiness){
+    }
+    
+    
+    
+    
+}
+
+public class Seller extends Employee {
+    public Food sell(Employee e){
+        if (e.wallet.getBalance() >= food.getPrice()) {
+            e.wallet.setBalance(e.wallet.getBalance() - food.getPrice());
+            this.wallet.setBalance(this.wallet.getBalance() + food.getPrice());
+            return food;
+        } else {
+            System.out.println(buyer.name + " doesn't have enough money.");
+            return null;
+        }
+    }
+
+}
+public class SeniorProgrammer extends Programmer{
+    public void compliment(Programmer programmer) {
+        programmer.setHappiness(programmer.getHappiness() + 20);
+        System.out.println(programmer.getName() + " in a good mood");
+    }
+
+    public void blame(Programmer programmer) {
+        programmer.setHappiness(programmer.getHappiness() - 20);
+        System.out.println(programmer.getName() + " in a bad mood");
+    }
+}
+public class Wallet {
+    private double balance; 
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
+
+}
+
