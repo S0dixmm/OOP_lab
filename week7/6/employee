@@ -1,0 +1,271 @@
+public class Employee {
+    private int energy;
+    private String name;
+    private Wallet wallet;
+    private static String nationality = "Thai";
+    
+    
+    public int getEnergy() {
+        return energy;
+    }
+
+    public void setEnergy(int energy) {
+        this.energy = energy;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Wallet getWallet() {
+        return wallet;
+    }
+
+    public void setWallet(Wallet wallet) {
+        this.wallet = wallet;
+    }
+
+    public static String getNationality() {
+        return nationality;
+    }
+
+    public static void setNationality(String nationality) {
+        Employee.nationality = nationality;
+    }
+    public boolean buyFood(Seller s){
+        Food food = s.sell(this);
+        if (food != null){
+            this.eat(food);
+            return true;
+        } else{
+            return false;
+        } 
+    }
+    public void eat(Food f){
+        this.energy += f.getEnergy();
+    }
+    public boolean equals(Employee e){
+        return this.name.equals(e.getName());
+    }
+    @Override
+    public String toString(){
+        return "My name is "+ name +". \n"+"I have "+ energy + " energy left."+"\n"+"I have a "
+                + "balance of "+wallet.getBalance()+" baht.";
+    }
+
+}
+
+public class Food {
+    private static  double price = 50;
+    private static final int energy = 10;
+
+    public static double getPrice() {
+        return price;
+    }
+
+    public static int getEnergy() {
+        return energy;
+    }
+
+    public static void setPrice(double price) {
+        Food.price = price;
+    }
+    
+    
+    
+}
+
+public class Programmer extends Employee{
+    private int happiness;
+
+    public int getHappiness() {
+        return happiness;
+    }
+
+    public void setHappiness(int happiness) {
+        this.happiness = happiness;
+    }
+    public void coding(String str){
+        if (getEnergy() >= 30){
+            System.out.println("Your code is " + str);
+            setEnergy(getEnergy() - 30);
+            setHappiness(getHappiness() - 30);
+        } else{
+            System.out.println("Error Error Error");
+            setEnergy(getEnergy() - 30);
+            setHappiness(getHappiness() - 30);
+        }
+    }
+    public void coding(char str){
+        if (this instanceof SeniorProgrammer){
+            String text = String.valueOf(str);
+            coding(text);
+            return;
+        }
+        if (getEnergy() >= 30){
+            System.out.println("Your code is " + str);
+            setEnergy(getEnergy() - 30);
+            setHappiness(getHappiness() - 30);
+        } else{
+            System.out.println("Error Error Error");
+            setEnergy(getEnergy() - 30);
+            setHappiness(getHappiness() - 30);
+        }
+    
+}
+}
+
+public class Seller extends Employee {
+    public Food sell(Employee e){
+        double price = Food.getPrice();
+        double balance = e.getWallet().getBalance();
+        if (balance >= price){
+            e.getWallet().setBalance(balance - price);
+            getWallet().setBalance(getWallet().getBalance() + price);
+            return new Food();
+        } else{
+            System.out.println("Your money is not enough.");
+            return null;
+        }
+        
+    }
+
+}
+
+public class SeniorProgrammer extends Programmer {
+    @Override
+    public void coding(String str){
+        if (getEnergy() >= 10){
+            System.out.println("I'm coding about " + str);
+            setEnergy(getEnergy() - 5);
+            setHappiness(getHappiness() - 5);
+        } else{
+            System.out.println("ZzZzZz");
+            setEnergy(getEnergy() - 5);
+            setHappiness(getHappiness() - 5);
+        }
+    }
+    public void coding(String str, int num) {
+        for (int i = 0; i < num; i++) {
+            if (getEnergy() >= 10) {
+                System.out.println("I'm coding about " + str);
+                setEnergy(getEnergy() - 5);
+                setHappiness(getHappiness() - 5);
+            } else {
+                System.out.println("ZzZzZz");
+                setEnergy(getEnergy() - 5);
+                setHappiness(getHappiness() - 5);
+            }
+        }
+    }
+    public void blame(Programmer p){
+        p.setHappiness(p.getHappiness() - 20);
+        System.out.println(p.getName() + " in a bad mood");
+    }
+    public void compliment(Programmer p){
+        p.setHappiness(p.getHappiness() + 20);
+        System.out.println(p.getName() + " in a good mood");
+    }
+    
+}
+
+public class Wallet {
+    private double balance;
+    public double getBalance(){
+        return balance;
+    }
+    public void setBalance(double balance){
+        this.balance = balance;
+    }
+}
+    
+public class main1 {
+ public static void main(String[] args) {
+ Wallet w1 = new Wallet();
+ Wallet w2 = new Wallet();
+ w1.setBalance(200);
+ w2.setBalance(100);
+
+ Seller s1 = new Seller();
+ s1.setName("Peter");
+ s1.setEnergy(100);
+ s1.setWallet(w1);
+
+ Employee e1 = new Employee();
+ e1.setName("Adam");
+ e1.setEnergy(100);
+ e1.setWallet(w2);
+
+ System.out.println(s1);
+ System.out.println(e1);
+ e1.buyFood(s1);
+ System.out.println(s1);
+ System.out.println(e1);
+ }
+}
+public class main2 {
+ public static void main(String[] args) {
+ Wallet w1 = new Wallet();
+ Wallet w2 = new Wallet();
+ w1.setBalance(200);
+ w2.setBalance(100);
+
+ Programmer p1 = new Programmer();
+ p1.setName("Sara");
+ p1.setEnergy(100);
+ p1.setWallet(w1);
+ p1.setHappiness(100);
+
+ SeniorProgrammer sp1 = new SeniorProgrammer();
+ sp1.setName("Kim");
+ sp1.setEnergy(100);
+ sp1.setWallet(w2);
+ sp1.setHappiness(100);
+
+ System.out.println(p1 + "\nHappiness : " +p1.getHappiness());
+ System.out.println(sp1 + "\nHappiness : " +sp1.getHappiness());
+ sp1.compliment(p1);
+ sp1.compliment(p1);
+ System.out.println(p1 + "\nHappiness : " +p1.getHappiness());
+ System.out.println(sp1 + "\nHappiness : " +sp1.getHappiness());
+ sp1.blame(p1);
+ System.out.println(p1 + "\nHappiness : " +p1.getHappiness());
+ System.out.println(sp1 + "\nHappiness : " +sp1.getHappiness());
+ }
+}
+
+public class main3 {
+ public static void main(String[] args) {
+ Wallet w1 = new Wallet();
+ Wallet w2 = new Wallet();
+ w1.setBalance(200);
+ w2.setBalance(100);
+
+ Programmer p1 = new Programmer();
+ p1.setName("Boy");
+ p1.setEnergy(100);
+ p1.setWallet(w1);
+ p1.setHappiness(100);
+
+ SeniorProgrammer sp1 = new SeniorProgrammer();
+ sp1.setName("Ploy");
+ sp1.setEnergy(100);
+ sp1.setWallet(w2);
+ sp1.setHappiness(100);
+
+ System.out.println(sp1 + "\nHappiness : " +sp1.getHappiness());
+ sp1.coding('A');
+ sp1.coding("Bugggggg");
+ sp1.coding("Bugggggg",2);
+ System.out.println(sp1 + "\nHappiness : " +sp1.getHappiness());
+ System.out.println("---------------------------------");
+ System.out.println(p1 + "\nHappiness : " +p1.getHappiness());
+ p1.coding('B');
+ p1.coding("Deathhhhhhhh");
+ System.out.println(p1 + "\nHappiness : " +p1.getHappiness());
+ }
+}
