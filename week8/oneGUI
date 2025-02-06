@@ -1,0 +1,47 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+
+/**
+ *
+ * @author User
+ */
+import javax.swing.*;
+import java.awt.*;
+
+public class CalculatorOneGUI {
+    private JFrame fr;
+    private JPanel pn;
+    private JButton bn1, bn2, bn3, bn4;
+    private JTextField textField ,text2,text3;
+        
+    public CalculatorOneGUI(){
+        fr = new JFrame("Calculator");
+        fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        fr.setSize(300, 200);
+        fr.setLayout(new GridLayout(4,1));
+        textField = new JTextField();
+        text2 = new JTextField();
+        text3 = new JTextField();
+        fr.add(textField);
+        
+        pn = new JPanel();
+        pn.setLayout(new FlowLayout());
+                
+        bn1 = new JButton("Plus");
+        bn2 = new JButton("Minus");
+        bn3 = new JButton("Multiplie");
+        bn4 = new JButton("Divide");
+        pn.add(bn1);
+        pn.add(bn2);
+        pn.add(bn3);
+        pn.add(bn4);
+        fr.add(text2);
+        fr.add(pn);
+        fr.add(text3);
+        fr.setVisible(true);
+    }
+    
+ }
+
