@@ -1,0 +1,38 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+
+/**
+ *
+ * @author User
+ */
+import java.awt.*;
+import javax.swing.*;
+
+public class exam13 {
+    private JFrame jf;
+    private JPanel pn1;
+    private JTextArea ta;
+    private JButton bt1, bt2;
+    
+    
+    public exam13(){
+        jf = new JFrame("EEE");
+        jf.setSize(200,160);
+        jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        jf.setLayout(new BorderLayout());
+        
+        pn1 = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        bt1 = new JButton("lllll");
+        bt2 = new JButton("22222");
+        pn1.add(bt1 ,FlowLayout.LEFT);
+        pn1.add(bt2 ,FlowLayout.LEFT);
+        
+        ta = new JTextArea();
+        jf.add(pn1,BorderLayout.NORTH);
+        jf.add(ta,BorderLayout.CENTER);
+        
+        jf.setVisible(true);
+}   
+}
